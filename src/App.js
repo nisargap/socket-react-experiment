@@ -6,11 +6,20 @@ import Websocket from 'react-websocket';
 class App extends Component {
 
   handleData(data) {
-	
+
 	// log data to console
 	console.log(data);
 
-  } 
+  // Found how to parse blobs on stackoverflow: https://stackoverflow.com/questions/15341912/how-to-go-from-blob-to-arraybuffer
+  var arrayBuffer;
+  var fileReader = new FileReader();
+  fileReader.onload = function() {
+      arrayBuffer = this.result;
+  };
+  fileReader.readAsArrayBuffer(data);
+  console.log(fileReader.result);
+
+  }
   render() {
     return (
       <div className="App">
